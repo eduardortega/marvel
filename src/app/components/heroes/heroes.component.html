@@ -1,0 +1,29 @@
+<div class="input-group col-md-10">
+    <input type="text" class="form-control" placeholder="filter" [(ngModel)]="nameStartsWith">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="getFilterHeroes()">Search</button>
+    </div>
+</div>
+
+<ul class="hero-list" *ngIf="heroes.length > 1">
+    <li class="hero-list-item" *ngFor="let h of heroes" (click)="showHero(h)">
+        <img class="hero-img" *ngIf="h.thumbnail" src="{{h.thumbnail.path + '.' + h.thumbnail.extension}}" alt="Hero image cap">
+        <h5>{{h.name}}</h5>
+    </li>
+    <li class="form-group">
+        <div class="btn btn-dark btn-lg" (click)="viewMore()">View more heroes</div>
+    </li>    
+</ul>
+
+<div class="card main-section" *ngIf="heroes.length < 1 && !loadingLayer">
+    <div class="card-body">
+        There are no heroes for this criteria
+    </div>
+</div>
+
+<div class="loadingLayer" *ngIf="loadingLayer">
+    <div class="loader"></div>
+    <div class="title">Loading...</div>
+</div>
+
+<app-sidenav [selectedHero]="selectedHero" [toggleSidenav]="toggleSidenav" (messageEvent)="listenSidenav($event)"></app-sidenav>

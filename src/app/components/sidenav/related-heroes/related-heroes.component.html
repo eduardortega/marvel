@@ -1,0 +1,33 @@
+<div *ngIf="related.length > 1">
+    <h5>Related Heroes</h5>    
+    <ul class="hero-list related">
+        <li class="hero-list-item" *ngFor="let h of related" style="cursor: default">
+            <img class="hero-img" *ngIf="h.thumbnail" src="{{h.thumbnail.path + '.' + h.thumbnail.extension}}" alt="Hero image cap">
+            <p>{{h.name}}</p>
+        </li>
+    </ul>
+    <hr>
+<!-- 
+    <ul class="hero-list related">
+        <li class="hero-list-item">
+            <img class="hero-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="Hero image cap">
+            <p>Dumy Hero Name</p>
+        </li>
+        <li class="hero-list-item">
+            <img class="hero-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="Hero image cap">
+            <p>Dumy Hero Name</p>
+        </li>
+        <li class="hero-list-item">
+            <img class="hero-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="Hero image cap">
+            <p>Dumy Hero Name</p>
+        </li>
+        <li class="hero-list-item">
+            <img class="hero-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="Hero image cap">
+            <p>Dumy Hero Name</p>
+        </li>
+        <li class="hero-list-item">
+            <img class="hero-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="Hero image cap">
+            <p>Dumy Hero Name</p>
+        </li>
+    </ul> -->
+</div>

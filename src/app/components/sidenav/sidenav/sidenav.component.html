@@ -1,0 +1,14 @@
+<div class="sidenavLayer" *ngIf="toggleSidenav" [ngClass]="{ 'toggled' : toggleSidenav }" (click)="emitSidenav()"></div>
+<div class="sidenav text-center" [ngClass]="{ 'toggled' : toggleSidenav }">
+    <div class="form-group">
+        <div (click)="emitSidenav()" class="btn btn-dark btn-close">CLOSE</div>
+        <img src="{{selectedHero.thumbnail.path}}.{{selectedHero.thumbnail.extension}}" width="100%" *ngIf="selectedHero">
+    </div>
+    <div *ngIf="selectedHero" class="container">
+        <h3>{{selectedHero.name}}</h3>
+        <p>{{selectedHero.description}}</p>
+
+        <app-related-heroes [selectedHero]="selectedHero"></app-related-heroes>
+
+    </div>
+</div>
