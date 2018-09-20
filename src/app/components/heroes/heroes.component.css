@@ -27,7 +27,10 @@
 
 @media (max-width: 600px) {
     .hero-list .hero-list-item {
-        width: 30%;
+        width: 26%;
+    }
+    .hero-list .hero-list-item h5 {
+        font-size: 14px;
     }
 }
 
@@ -36,12 +39,6 @@
     padding-bottom: 5px;
 }
 
-.hero-list.related .hero-list-item {
-    font-size: 12px;
-    line-height: 1.1;
-    margin: 10px 5px;
-    width: 20%;
-}
 
 /***************
 * LOADING LAYER

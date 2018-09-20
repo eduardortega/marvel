@@ -10,7 +10,7 @@ export class SidenavComponent {
   @Input() selectedHero;
   @Input() toggleSidenav: boolean;
 
-  @Output() messageEvent = new EventEmitter<{}>();
+  @Output() messageEvent = new EventEmitter<boolean>();
 
   messageEmit = {
     toggleSidenav: false
@@ -20,8 +20,7 @@ export class SidenavComponent {
    * close sidenav
    * send message to parent 
    */
-  emitSidenav()
-  {
+  emitSidenav() {
     this.messageEvent.emit(this.messageEmit.toggleSidenav)
   }
 

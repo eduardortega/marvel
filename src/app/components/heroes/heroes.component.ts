@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../models/Hero';
 import { DataService } from '../../services/data.service';
-import { FilterPipe } from '../../modules/filter';
 
 @Component({
   selector: 'app-heroes',
@@ -14,15 +13,15 @@ export class HeroesComponent implements OnInit {
   /**
    * init variables
    */
-  heroes = [];
-  limit = 50;
-  loadingLayer = false;
-  nameStartsWith = '';
-  offset = 0;
+  heroes : Hero[] = [];
+  limit : number = 50;
+  loadingLayer : boolean = false;
+  nameStartsWith : string = '';
+  offset : number = 0;
   posts = [];
-  relatedHeroes = [];
-  toggleSidenav = false;
-  selectedHero = null;
+  relatedHeroes : Hero[] = [];
+  selectedHero : Hero;
+  toggleSidenav : boolean = false;
 
   /**
    * constructor
@@ -43,8 +42,7 @@ export class HeroesComponent implements OnInit {
   /**
    * get heroes call
    */
-  getHeroes()
-  {
+  getHeroes() {
     this.loadingLayer = true;
 
     this.dataService.getHeroes(this.limit, this.offset, this.nameStartsWith)
@@ -85,14 +83,19 @@ export class HeroesComponent implements OnInit {
 
   /**
    * show hero in sidebar
-   * @param hero
+   * @param hero 
    */
-  showHero(hero)
+  showHero(hero: Hero)
   {
     this.toggleSidenav = true;
     this.selectedHero = hero;
   }
 
+
+  /**
+   * listen from sidenav event
+   * @param $event 
+   */
   listenSidenav($event) {
     this.toggleSidenav = $event;    
   }

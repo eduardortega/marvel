@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
 import { Md5 } from 'ts-md5/dist/md5';
+import { Hero } from '../models/Hero';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +32,7 @@ export class DataService {
   /**
    * generate common params
    */
-  generateCommonParams()
-  {
+  generateCommonParams() {
     let _date: string = new Date().getTime().toString();
     let p = new HttpParams().set('ts', _date)
                             .set('apikey', this.credentials.publicApiKey)
@@ -46,7 +47,7 @@ export class DataService {
    * @param offset 
    * @param nameStartsWith
    */
-  getHeroes(limit, offset, nameStartsWith) {
+  getHeroes(limit, offset, nameStartsWith): Observable<Hero[]> {
     let p = this.generateCommonParams();
     p = p.set('limit', limit)
     p = p.set('offset', offset);
@@ -55,7 +56,7 @@ export class DataService {
       p = p.set('nameStartsWith', nameStartsWith);
     }                        
     
-    return this.httpClient.get('http://gateway.marvel.com/v1/public/characters', { params: p } );
+    return this.httpClient.get<Hero[]>('http://gateway.marvel.com/v1/public/characters', { params: p } );
   }
 
   
@@ -64,8 +65,8 @@ export class DataService {
    * @param entity 
    * @param id 
    */
-  getHeroesFromEntity(entity: string, id: string ) {
-    return this.httpClient.get('http://gateway.marvel.com/v1/public/'+entity+'/'+id+'/characters', { params: this.generateCommonParams() } );
+  getHeroesFromEntity(entity: string, id: string) : Observable<Hero[]> {
+    return this.httpClient.get<Hero[]>('http://gateway.marvel.com/v1/public/'+entity+'/'+id+'/characters', { params: this.generateCommonParams() } );
   }
 
 }

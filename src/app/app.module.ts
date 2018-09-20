@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 
-import { FilterPipe } from './modules/filter';
-
 import { DataService } from './services/data.service';
 import { SidenavComponent } from './components/sidenav/sidenav/sidenav.component';
 import { RelatedHeroesComponent } from './components/sidenav/related-heroes/related-heroes.component';
@@ -16,7 +14,6 @@ import { RelatedHeroesComponent } from './components/sidenav/related-heroes/rela
   declarations: [
     AppComponent,
     HeroesComponent,
-    FilterPipe,
     SidenavComponent,
     RelatedHeroesComponent
   ],

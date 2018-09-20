@@ -1,0 +1,7 @@
+.hero-list.related .hero-list-item {
+    cursor: default;
+    font-size: 12px;
+    line-height: 1.1;
+    margin: 10px 5px;
+    width: 22%;
+}
