@@ -89,6 +89,8 @@ export class HeroesComponent implements OnInit {
   {
     this.toggleSidenav = true;
     this.selectedHero = hero;
+    document.getElementsByTagName('html')[0].className += ' toggled';
+    document.getElementsByTagName('body')[0].className += ' toggled';
   }
 
 
@@ -98,5 +100,10 @@ export class HeroesComponent implements OnInit {
    */
   listenSidenav($event) {
     this.toggleSidenav = $event;    
+
+    let htmlObj = document.getElementsByTagName('html')[0];
+    let bodyObj = document.getElementsByTagName('body')[0];
+    htmlObj.className = htmlObj.className.replace(/(?:^|\s)toggled(?!\S)/g,'');
+    bodyObj.className = bodyObj.className.replace(/(?:^|\s)toggled(?!\S)/g,'');
   }
 }
