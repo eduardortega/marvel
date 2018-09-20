@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { DataService } from '../../../services/data.service';
+import { Hero } from '../../../models/Hero';
 
 @Component({
   selector: 'app-related-heroes',
   templateUrl: './related-heroes.component.html',
   styleUrls: ['../../heroes/heroes.component.css','./related-heroes.component.css']
 })
-export class RelatedHeroesComponent implements OnInit, OnChanges {
+export class RelatedHeroesComponent implements  OnChanges {
 
   @Input() selectedHero;
 
-  related = [];
+  related : Hero[] = [];
   entities : Array<string> = ['comics', 'events', 'series', 'stories'];
 
   /**
@@ -21,9 +22,6 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnInit() {
-    
-  }
 
   /**
    * listen changes on selectedHero
@@ -40,16 +38,14 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
    * init related heroes
    * @param hero 
    */
-  initRelatedHeroes(hero)
+  initRelatedHeroes(hero: Hero)
   {
     this.related = [];
     this.selectedHero = hero;
 
-    const entities : Array<string> = ['comics, events, series, stories'];
-
     for (let entity of this.entities) {      
       if(hero[entity].available) {
-        let entityId = this.getEntityId(hero[entity]);
+        let entityId : string = this.getEntityId(hero[entity]);
         this.getRelatedHeroes(entity, entityId);
       }
     }
@@ -61,7 +57,7 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
    * @param entity 
    */
   getEntityId(entity) {
-    let splitted = entity.items[0].resourceURI.split('/'); 
+    let splitted : Array<string> = entity.items[0].resourceURI.split('/'); 
     return splitted[splitted.length-1];
   }
 
@@ -71,7 +67,7 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
    * @param entity
    * @param entityId 
    */
-  getRelatedHeroes(entity, entityId) {
+  getRelatedHeroes(entity: string, entityId: string) {
     this.dataService.getHeroesFromEntity(entity, entityId)
       .subscribe(
         (info) => {
@@ -93,13 +89,12 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
    * - checks not to push repetitions
    * @param items 
    */
-  checkAndAppend(items) {
+  checkAndAppend(items: Hero[]) {
     const itemsToPush = [];
 
     for (let item of items) {      
-
       if(item.id != this.selectedHero.id) {
-        let toPush = true;
+        let toPush : boolean = true;
         for (let rel of this.related) {
           if(rel.id === item.id) {
             toPush = false;  
@@ -110,9 +105,8 @@ export class RelatedHeroesComponent implements OnInit, OnChanges {
           this.related.push(item);
         }
       }
-
     }
-
   }
+
 
 }
